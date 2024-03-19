@@ -1,0 +1,23 @@
+{
+    "name": "mateu/server",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Domain\\": "app/Domain"
+        },
+        "files": [
+            "boot/helpers.php",
+            "boot/config.php"
+        ]
+    },
+    "require": {
+        "vlucas/phpdotenv": "^5.6",
+        "firebase/php-jwt": "^6.10"
+    },
+    "scripts": {
+        "server": "php -S localhost:8080 -t ./public"
+    },
+    "config": {
+        "process-timeout": 0
+    }
+}
