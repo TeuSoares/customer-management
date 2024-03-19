@@ -5,9 +5,6 @@ const api = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_API_URL}`,
 })
 
-api.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:3000';
-api.defaults.headers.common['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE';
-api.defaults.headers.common['Access-Control-Allow-Headers'] = 'Authorization, Content-Type';
 api.defaults.withCredentials = true
 
 api.interceptors.request.use((config) => {

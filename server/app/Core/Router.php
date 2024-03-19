@@ -46,11 +46,16 @@ class Router
     {
         $path = $_SERVER['PATH_INFO'];
 
+        if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+            return $this->sendOptionsResponse();
+        }
+
         foreach ($this->routes as $route => $actions) {
             // Verifica se a URL da rota corresponde à URL da requisição
             if (preg_match($this->convertToRegex($route), $path, $matches)) {
                 foreach ($actions as $action) {
                     if ($_SERVER['REQUEST_METHOD'] == $action['method']) {
+                        $this->sendCorsHeaders();
                         return $this->executeCallback($action['callback'], $matches);
                     }
                 }
@@ -88,5 +93,19 @@ class Router
         $response = call_user_func([$container->make($controller), $method], $request);
 
         $response->send();
+    }
+
+    private function sendCorsHeaders(): void
+    {
+        header("Access-Control-Allow-Origin: http://localhost:3000");
+        header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+        header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization");
+        header("Access-Control-Allow-Credentials: true");
+    }
+
+    private function sendOptionsResponse(): void
+    {
+        $this->sendCorsHeaders();
+        header("HTTP/1.1 200 OK");
     }
 }
