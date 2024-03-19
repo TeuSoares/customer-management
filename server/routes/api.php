@@ -2,21 +2,6 @@
 
 use App\Core\Router;
 
-// Permitir solicitações de qualquer origem
-header("Access-Control-Allow-Origin: http://localhost:3000");
-
-// Permitir solicitações com métodos específicos
-header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
-
-// Permitir cabeçalhos específicos
-header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
-
-// Permitir que os cabeçalhos e cookies de autenticação sejam enviados
-header("Access-Control-Allow-Credentials: true");
-
-// Configurar o tipo de conteúdo da resposta
-header("Content-Type: application/json");
-
 $router = new Router();
 
 $router->post('/login', 'Domain\Auth\Controllers\AuthController@login');
