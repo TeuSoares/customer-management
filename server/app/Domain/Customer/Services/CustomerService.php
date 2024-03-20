@@ -26,6 +26,11 @@ class CustomerService
         return $this->repository->create($data);
     }
 
+    public function show(int $id): array
+    {
+        return $this->repository->getById($id);
+    }
+
     public function getAllByUser(array $params = []): array|false
     {
         return $this->repository->getAllByUser(user()->data->id, $params);

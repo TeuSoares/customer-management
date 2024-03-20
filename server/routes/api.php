@@ -10,6 +10,7 @@ $router->post('/register', 'Domain\Auth\Controllers\AuthController@register');
 
 $router->get('/customer', 'Domain\Customer\Controllers\CustomerController@index');
 $router->post('/customer', 'Domain\Customer\Controllers\CustomerController@store');
+$router->get('/customer/{id}', 'Domain\Customer\Controllers\CustomerController@show');
 $router->put('/customer/{id}', 'Domain\Customer\Controllers\CustomerController@update');
 $router->delete('/customer/{id}', 'Domain\Customer\Controllers\CustomerController@destroy');
 

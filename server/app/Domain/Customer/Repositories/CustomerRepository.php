@@ -37,10 +37,10 @@ class CustomerRepository
             ])
             ->execute();
 
-        return $stmt->fetch();
+        return $stmt->fetch() ?? [];
     }
 
-    public function getById(int $id): array|false
+    public function getById(int $id): array
     {
         $stmt = $this->model->read()
             ->where('id = :id')
@@ -49,7 +49,7 @@ class CustomerRepository
             ])
             ->execute();
 
-        return $stmt->fetch();
+        return $stmt->fetch() ?? [];
     }
 
     public function update(int $id, array $data): int
