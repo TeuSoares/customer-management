@@ -2,7 +2,6 @@
 
 import { QueryClient, QueryClientProvider } from 'react-query'
 
-import Footer from '@/components/footer'
 import Header from '@/components/header'
 import Container from '@/components/layout/container'
 import Loading from '@/components/layout/loading'
@@ -24,7 +23,6 @@ export default function RootLayoutCustomer({
         <main className="py-10 px-5">
           <Container>{children}</Container>
         </main>
-        <Footer />
       </QueryClientProvider>
     </>
   )
