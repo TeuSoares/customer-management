@@ -4,6 +4,7 @@ import { useAppContext } from '@/hooks'
 
 import { convertDataToBR } from '@/utils/helpers'
 
+import LinkButton from '@/components/layout/link-button'
 import {
   Table,
   TableBody,
@@ -36,6 +37,7 @@ const TableCustomers = () => {
           <TableHead className="text-white text-center">CPF</TableHead>
           <TableHead className="text-center text-white">RG</TableHead>
           <TableHead className="text-center text-white">Telefone</TableHead>
+          <TableHead className="text-center text-white">#</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody className="bg-[#111111] text-white">
@@ -46,6 +48,13 @@ const TableCustomers = () => {
             <TableCell>{customer.cpf}</TableCell>
             <TableCell>{customer.rg}</TableCell>
             <TableCell>{customer.phone}</TableCell>
+            <TableCell>
+              <LinkButton
+                href={`/cliente/${customer.id}`}
+                label="Visualizar"
+                className="bg-[#BC2627] hover:bg-[#9e3535] hover:text-white"
+              />
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>
