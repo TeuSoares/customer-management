@@ -8,3 +8,13 @@ export const setHours = (hours: number) => {
 
   return date
 }
+
+export const convertDataToBR = (data: string): string => {
+  const dataObj = new Date(data)
+
+  return dataObj.toLocaleString('pt-BR', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+  })
+}
