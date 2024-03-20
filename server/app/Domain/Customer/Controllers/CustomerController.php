@@ -20,6 +20,13 @@ class CustomerController extends Controller
         return $this->responseData(response(), $data);
     }
 
+    public function show(Request $request): Response
+    {
+        $data = $this->service->show($request->getArguments()['id']);
+
+        return $this->responseData(response(), $data);
+    }
+
     public function store(Request $request): Response
     {
         $this->service->create($request->getParsedBody());
