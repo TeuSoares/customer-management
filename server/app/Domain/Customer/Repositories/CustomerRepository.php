@@ -25,7 +25,7 @@ class CustomerRepository
             ])
             ->execute();
 
-        return $stmt->fetch();
+        return $stmt->fetchAll();
     }
 
     public function getByCpf(string $cpf): array|false
