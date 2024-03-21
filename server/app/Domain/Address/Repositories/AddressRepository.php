@@ -16,7 +16,7 @@ class AddressRepository
         return $this->model->create($data);
     }
 
-    public function getAllByCustomer(int $customer_id): array|false
+    public function getAllByCustomer(int $customer_id): array
     {
         $stmt = $this->model->read()
             ->where('customer_id = :customer_id')
@@ -25,7 +25,7 @@ class AddressRepository
             ])
             ->execute();
 
-        return $stmt->fetch();
+        return $stmt->fetchAll();
     }
 
     public function update(int $id, array $data): int

@@ -23,7 +23,7 @@ class AddressService
         return $this->repository->create($data);
     }
 
-    public function getAllByCustomer(int $customer_id): array|false
+    public function getAllByCustomer(int $customer_id): array
     {
         return $this->repository->getAllByCustomer($customer_id);
     }
