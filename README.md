@@ -27,7 +27,7 @@ git clone https://github.com/TeuSoares/customer-management.git
 
 ### Front-end:
 
-1. Instalar as dependências e iniciar. 
+Instalar as dependências e iniciar. 
 ```bash
     cd web
 ```
@@ -38,22 +38,26 @@ git clone https://github.com/TeuSoares/customer-management.git
     npm run dev
 ```
 
-1. 1 Se quiser utilizar docker, basta rodar o comando
+Se quiser utilizar docker, basta rodar o comando
+```bash
+    cd web
+```
 ```bash
     docker compose up -d
 ```
 
-2. Crie o .env na raiz do projeto web
+Crie o .env na raiz do projeto web
 ```bash
     cp .env.example .env
 ```
-- Configure a variável NEXT_PUBLIC_API_URL no .env, especificando o local que seu back está rodando (Ex: http://localhost:8080)
 
-3. Seu front estará rodando em: http://localhost:3000
+Configure a variável NEXT_PUBLIC_API_URL no .env, especificando o local que seu back está rodando (Ex: http://localhost:8080)
+
+Seu front estará rodando em: http://localhost:3000
 
 ### Configurando o back-end:
 
-1. Instalando as dependências
+Instalando as dependências
 ```bash
     cd server
 ```
@@ -61,7 +65,7 @@ git clone https://github.com/TeuSoares/customer-management.git
     composer install ou docker compose run --rm composer install
 ```
 
-2. Crie o .env e configure as variáveis necessárias
+Crie o .env e configure as variáveis necessárias
 ```bash
     cp .env.example .env
 ```
@@ -76,15 +80,16 @@ DB_PASSWORD=<senha>
 TOKEN_KEY=<chave JWT> // Pode ser qualquer chave
 ```
 
-3. Iniciar o servidor
+Iniciar o servidor sem Docker
+
+- Você pode utilizar o servidor embutido do PHP. Para isso rode o comando:
 
 ```bash
     composer run server
 ```
 ``Esse comando irá iniciar um servidor embutido PHP na porta 8080 dentro da pasta public do projeto``
 
-Se estiver utilizando o apache:
-- Se estiver rodando o projeto com apache, existe duas possibilidades para rodar o projeto.
+- Se estiver utilizando o apache, existe duas possibilidades para rodar o projeto.
 
 1. Na variavel NEXT_PUBLIC_API_URL no .env do front. Deverá ser especificado o local onde está o projeto
   ``Ex: http://localhost/<pasta_principal>/server/public``
@@ -103,7 +108,8 @@ Iniciando com Docker:
 ```
 ``Irá subir para você o container do PHP, MySQL, PHPMyAdmin e Nginx``
 
-4. Configurando o banco de dados
-   
+``O servidor vai rodar em http://localhost:8080``
+
+Configurando o banco de dados
    - Crie um novo banco de dados e execute o script sql que está dentro da pasta boot em server, no MySQL.
    - Caso esteja utilizando com docker, o PHPMyAdmin vai estar rodando em: ``http://localhost:8081``
