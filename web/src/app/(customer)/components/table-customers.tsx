@@ -15,7 +15,7 @@ import {
   TableRow,
 } from '@/components/ui/table'
 
-import CustomerService from '../CustomerService'
+import CustomerService from '../(pages)/CustomerService'
 
 const TableCustomers = () => {
   const { data } = CustomerService()
