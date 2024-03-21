@@ -1,7 +1,7 @@
 'use client'
 
-import CardFooterLink from '../../components/card-footer-link'
-import CardForm from '@/app/(auth)/components/card-form'
+import CardFooterLink from '../../../../components/layout/card-footer-link'
+import CardForm from '@/components/layout/card-form'
 import TextField from '@/components/form/components/text-field'
 
 import { formSchema } from '../login/formSchema'

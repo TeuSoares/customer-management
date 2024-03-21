@@ -4,7 +4,7 @@ import { useQuery } from 'react-query'
 
 import { useFetch, useAppContext, useMessage, useError } from '@/hooks'
 
-import { RegisterUserFormData } from './(pages)/adicionar-cliente/formSchema'
+import { RegisterUserFormData } from './cliente/adicionar/formSchema'
 
 interface Customer {
   data: Array<{

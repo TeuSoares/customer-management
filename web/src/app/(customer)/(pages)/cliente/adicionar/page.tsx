@@ -1,6 +1,6 @@
 'use client'
 
-import CardForm from '../../components/card-form'
+import CardForm from '../../../../../components/layout/card-form'
 import TextField from '@/components/form/components/text-field'
 import { Card } from '@/components/ui/card'
 

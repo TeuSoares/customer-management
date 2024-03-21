@@ -12,7 +12,7 @@ const Header = () => {
   return (
     <header className="p-4 text-center bg-[#111111]">
       <LinkButton label="Dashboard" href="/" />
-      <LinkButton label="Adicionar Cliente" href="/adicionar-cliente" />
+      <LinkButton label="Adicionar Cliente" href="/cliente/adicionar" />
       <Button
         className="bg-transparent hover:bg-transparent text-white font-bold hover:text-[#BC2627]"
         onClick={handleLogout}
