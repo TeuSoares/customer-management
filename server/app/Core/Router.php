@@ -44,7 +44,11 @@ class Router
 
     public function dispatch(): mixed
     {
-        $path = $_SERVER['PATH_INFO'];
+        $request_uri = $_SERVER['REQUEST_URI'];
+
+        $parsed_url = parse_url($request_uri);
+
+        $path = $parsed_url['path'];
 
         if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
             return $this->sendOptionsResponse();
@@ -64,6 +68,7 @@ class Router
             }
         }
 
+        $this->sendCorsHeaders();
         $this->throwExceptionHttp("Rota não está definida.", 404);
     }
 
