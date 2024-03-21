@@ -65,7 +65,24 @@ DB_PASSWORD=<senha>
 
 TOKEN_KEY=<chave JWT> // Pode ser qualquer chave
 ```
-- Execute o comando abaixo para rodar o servidor:
+- Execute o comando abaixo para rodar o servidor: 
+  
+    ``Esse comando irá iniciar um servidor embutido PHP na porta 8080 dentro da pasta public do projeto``
+    
 ```bash
     composer run server
 ```
+
+Alguns pontos a se atentar:
+- Se estiver rodando o projeto com apache, existe duas possibilidades para rodar o projeto.
+
+1. Na variavel NEXT_PUBLIC_API_URL no .env do front. Deverá ser especificado o local onde está o projeto
+  ``Ex: http://localhost/<pasta_principal>/server/public``
+
+2. Outra possibilidade é adicionar o .htaccess abaixo dentro da pasta root do apache. (Ex: www), redirecionando para a pasta public dentro de server.
+   
+    ```
+    RewriteEngine On
+    RewriteCond %{REQUEST_URI} !^/nomeDaPastaPrincipal/server/public/
+    RewriteRule ^(.*)$ /nomeDaPastaPrincipal/server/public/$1 [L]
+    ```
