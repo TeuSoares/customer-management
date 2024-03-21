@@ -12,3 +12,9 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
+    networks:
+      - localhost-network
+
+networks:
+  localhost-network:
+    driver: bridge
