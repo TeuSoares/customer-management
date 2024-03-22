@@ -2,27 +2,27 @@
 
 namespace App\Core\Traits;
 
+use App\Core\Exceptions\CustomException;
+
 trait HandleExceptions
 {
-    public function throwExceptionHttp(string $message, int $statusCode = 500)
+    public function throwExceptionHttp(string|array $message, int $statusCode = 500)
     {
-        http_response_code($statusCode);
-        throw new \Exception(json_encode(
+        throw new CustomException(
             [
-                'error' => [
-                    'message' => $message,
-                ]
-            ]
-        ));
+                'message' => $message,
+            ],
+            $statusCode
+        );
     }
 
     public function throwValidationException(array $errors): void
     {
-        http_response_code(422);
-        throw new \Exception(json_encode(
+        throw new CustomException(
             [
-                'errors' => $errors
-            ]
-        ));
+                'validations' => $errors
+            ],
+            422
+        );
     }
 }

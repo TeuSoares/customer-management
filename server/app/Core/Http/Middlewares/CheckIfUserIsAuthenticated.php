@@ -2,30 +2,27 @@
 
 namespace App\Core\Http\Middlewares;
 
+use App\Core\Providers\Container;
+use App\Core\Traits\HandleExceptions;
 use App\Support\Token;
-use Domain\Auth\Models\PersonalAccessToken;
 use Domain\Auth\Repositories\PersonalAccessTokenRepository;
 
 class CheckIfUserIsAuthenticated
 {
+    use HandleExceptions;
+
     public function handle(): void
     {
         if (!Token::checkIfTokenIsValid()) {
-            header('Content-Type: application/json');
-            http_response_code(401);
-            die(json_encode(['message' => 'unauthenticated']));
+            $this->throwExceptionHttp('unauthenticated', 401);
         }
 
-        $personalAccessToken = new PersonalAccessToken;
-
-        $tokenRepository = new PersonalAccessTokenRepository($personalAccessToken);
+        $tokenRepository = (new Container)->make(PersonalAccessTokenRepository::class);
 
         $token = $tokenRepository->findOneByToken(request()->getAccessToken());
 
         if (!$token) {
-            header('Content-Type: application/json');
-            http_response_code(401);
-            die(json_encode(['message' => 'unauthenticated']));
+            $this->throwExceptionHttp('unauthenticated', 401);
         }
     }
 }

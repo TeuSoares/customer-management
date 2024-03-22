@@ -2,6 +2,7 @@
 
 namespace App\Core;
 
+use App\Core\Exceptions\CustomException;
 use PDOStatement;
 
 abstract class Model
@@ -165,7 +166,7 @@ abstract class Model
     private function termsIsRequired(): void
     {
         if (!$this->terms) {
-            throw new \Exception('Condições não definidas para executar a query.');
+            throw new CustomException('Condições não definidas para executar a query.');
         }
     }
 

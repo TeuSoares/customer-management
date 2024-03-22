@@ -2,9 +2,8 @@
 
 namespace App\Core\Providers;
 
+use App\Core\Exceptions\CustomException;
 use App\Core\Providers\Interfaces\ServiceProviderInterface;
-use Domain\User\Providers\UserServiceProviders;
-use Exception;
 use ReflectionClass;
 use ReflectionException;
 use ReflectionNamedType;
@@ -30,11 +29,11 @@ class Container
         try {
             $reflection = new ReflectionClass($class);
         } catch (ReflectionException $e) {
-            throw new Exception("Erro ao refletir sobre a classe {$class}: " . $e->getMessage());
+            throw new CustomException("Erro ao refletir sobre a classe {$class}: " . $e->getMessage());
         }
 
         if (!$reflection->isInstantiable()) {
-            throw new Exception("A classe {$class} não pode ser instanciada.");
+            throw new CustomException("A classe {$class} não pode ser instanciada.");
         }
 
         $constructor = $reflection->getConstructor();
@@ -50,7 +49,7 @@ class Container
             $dependency = $parameter->getType();
 
             if ($dependency === null || $parameter->isOptional()) {
-                throw new Exception("Não foi possível resolver a dependência para o parâmetro {$parameter->getName()} do construtor de {$class}");
+                throw new CustomException("Não foi possível resolver a dependência para o parâmetro {$parameter->getName()} do construtor de {$class}");
             }
 
             // Verifica se o tipo de parâmetro é um tipo de classe definido pelo usuário
