@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Core;
+namespace App\Core\Providers;
 
+use App\Core\Providers\Interfaces\ServiceProviderInterface;
+use Domain\User\Providers\UserServiceProviders;
 use Exception;
 use ReflectionClass;
 use ReflectionException;
@@ -9,8 +11,22 @@ use ReflectionNamedType;
 
 class Container
 {
+    private static $bindings = [];
+
+    public static function bind(string $interface, string $implementation)
+    {
+        self::$bindings[$interface] = $implementation;
+    }
+
     public function make(string $class): object
     {
+        if (interface_exists($class)) {
+            if (isset(self::$bindings[$class])) {
+                // Se for uma interface, eu recupero a implementação para ela.
+                $class = self::$bindings[$class];
+            }
+        }
+
         try {
             $reflection = new ReflectionClass($class);
         } catch (ReflectionException $e) {
@@ -49,5 +65,15 @@ class Container
 
         // Instancia a classe com as dependências resolvidas e retorna
         return $reflection->newInstanceArgs($dependencies);
+    }
+
+    public static function registerServiceProviders(array $providers)
+    {
+        foreach ($providers as $provider) {
+            $providerInstance = new $provider();
+            if ($providerInstance instanceof ServiceProviderInterface) {
+                $providerInstance->register();
+            }
+        }
     }
 }
