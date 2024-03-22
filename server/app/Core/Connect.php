@@ -26,10 +26,7 @@ class Connect
     public static function getInstance(): PDO
     {
         if (empty(self::$instance)) {
-            self::$host = DB_HOST;
-            self::$dbname = DB_DATABASE;
-            self::$username = DB_USERNAME;
-            self::$password = DB_PASSWORD;
+            self::setConfigData();
 
             try {
                 self::$instance = new PDO(
@@ -44,6 +41,16 @@ class Connect
         }
 
         return self::$instance;
+    }
+
+    private static function setConfigData(): void
+    {
+        $database = getContentFromFile(__DIR__ . '/../../config/app.php')['database'];
+
+        self::$host = $database['DB_HOST'];
+        self::$dbname = $database['DB_DATABASE'];
+        self::$username = $database['DB_USERNAME'];
+        self::$password = $database['DB_PASSWORD'];
     }
 
     final private function __construct()

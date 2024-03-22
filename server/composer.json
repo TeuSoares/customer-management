@@ -6,8 +6,7 @@
             "Domain\\": "app/Domain"
         },
         "files": [
-            "bootstrap/helpers.php",
-            "bootstrap/config.php"
+            "bootstrap/helpers.php"
         ]
     },
     "require": {
