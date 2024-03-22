@@ -6,14 +6,14 @@ use App\Core\Http\Middlewares\CheckIfUserIsAuthenticated;
 use App\Core\Traits\HandleExceptions;
 use App\Support\Token;
 use Domain\Auth\Repositories\PersonalAccessTokenRepository;
-use Domain\User\Repositories\UserRepository;
+use Domain\User\Repositories\UserRepositoryInterface;
 
 class AuthService
 {
     use HandleExceptions;
 
     public function __construct(
-        private UserRepository $userRepository,
+        private UserRepositoryInterface $userRepository,
         private PersonalAccessTokenRepository $tokenRepository
     ) {
     }

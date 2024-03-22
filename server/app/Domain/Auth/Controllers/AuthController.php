@@ -2,9 +2,9 @@
 
 namespace Domain\Auth\Controllers;
 
-use App\Core\Controller;
-use App\Core\Request;
-use App\Core\Response;
+use App\Core\Http\Controller;
+use App\Core\Http\Request;
+use App\Core\Http\Response;
 use Domain\Auth\Services\AuthService;
 
 class AuthController extends Controller

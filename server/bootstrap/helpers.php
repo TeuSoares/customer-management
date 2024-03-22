@@ -1,7 +1,7 @@
 <?php
 
-use App\Core\Request;
-use App\Core\Response;
+use App\Core\Http\Request;
+use App\Core\Http\Response;
 use App\Support\Token;
 
 function dd(mixed ...$value): void
@@ -57,4 +57,9 @@ function passwd_verify(string $password, string $hash): bool
 function user(): object
 {
     return Token::getData();
+}
+
+function getContentFromFile(string $file): array
+{
+    return include $file;
 }

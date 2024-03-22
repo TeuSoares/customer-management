@@ -2,10 +2,10 @@
 
 namespace Domain\Address\Controllers;
 
-use App\Core\Controller;
+use App\Core\Http\Controller;
 use App\Core\Http\Middlewares\CheckIfUserIsAuthenticated;
-use App\Core\Request;
-use App\Core\Response;
+use App\Core\Http\Request;
+use App\Core\Http\Response;
 use Domain\Address\Services\AddressService;
 
 class AddressController extends Controller
