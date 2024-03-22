@@ -11,6 +11,8 @@ return [
     ],
 
     'providers' => [
-        Domain\User\Providers\UserServiceProviders::class
+        Domain\User\Providers\UserServiceProviders::class,
+        Domain\Customer\Providers\CustomerServiceProviders::class,
+        Domain\Address\Providers\AddressServiceProviders::class
     ],
 ];
