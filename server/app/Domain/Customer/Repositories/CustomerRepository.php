@@ -5,7 +5,7 @@ namespace Domain\Customer\Repositories;
 use Domain\Customer\Models\Customer;
 use PDOStatement;
 
-class CustomerRepository
+class CustomerRepository implements CustomerRepositoryInterface
 {
     public function __construct(protected Customer $model)
     {
@@ -16,7 +16,7 @@ class CustomerRepository
         return $this->model->create($data);
     }
 
-    public function getAllByUser(int $user_id, array $params = []): array|false
+    public function getAllByUser(int $user_id, array $params = []): array
     {
         $stmt = $this->model->read()
             ->where('user_id = :user_id')

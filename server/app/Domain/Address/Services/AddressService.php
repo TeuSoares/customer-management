@@ -3,14 +3,14 @@
 namespace Domain\Address\Services;
 
 use App\Core\Traits\HandleExceptions;
-use Domain\Address\Repositories\AddressRepository;
+use Domain\Address\Repositories\AddressRepositoryInterface;
 use PDOStatement;
 
 class AddressService
 {
     use HandleExceptions;
 
-    public function __construct(protected AddressRepository $repository)
+    public function __construct(protected AddressRepositoryInterface $repository)
     {
     }
 

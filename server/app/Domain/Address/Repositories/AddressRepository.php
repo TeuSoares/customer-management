@@ -5,7 +5,7 @@ namespace Domain\Address\Repositories;
 use Domain\Address\Models\Address;
 use PDOStatement;
 
-class AddressRepository
+class AddressRepository implements AddressRepositoryInterface
 {
     public function __construct(protected Address $model)
     {
