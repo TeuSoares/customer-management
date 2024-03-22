@@ -5,7 +5,7 @@ namespace Domain\User\Repositories;
 use Domain\User\Models\User;
 use PDOStatement;
 
-class UserRepository
+class UserRepository implements UserRepositoryInterface
 {
     public function __construct(protected User $model)
     {
