@@ -3,6 +3,7 @@
 namespace Domain\Customer\Controllers;
 
 use App\Core\Http\Controller;
+use App\Core\Http\Middlewares\CheckIfUserIsAuthenticated;
 use App\Core\Http\Request;
 use App\Core\Http\Response;
 use Domain\Customer\Services\CustomerService;
@@ -11,6 +12,7 @@ class CustomerController extends Controller
 {
     public function __construct(protected CustomerService $service)
     {
+        (new CheckIfUserIsAuthenticated)->handle();
     }
 
     public function index(): Response

@@ -13,7 +13,6 @@ class CustomerService
 
     public function __construct(protected CustomerRepositoryInterface $repository)
     {
-        (new CheckIfUserIsAuthenticated)->handle();
     }
 
     public function create(array $data): PDOStatement
