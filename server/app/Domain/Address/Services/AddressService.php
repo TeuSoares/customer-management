@@ -49,8 +49,8 @@ class AddressService
         $requiredFields = ['address', 'number', 'city', 'state'];
 
         foreach ($requiredFields as $field) {
-            if (!isset($data[$field])) {
-                throw new \InvalidArgumentException("O campo {$field} é obrigatório.");
+            if (empty($data[$field])) {
+                $this->throwValidationException([$field => "O campo {$field} é obrigatório."]);
             }
         }
     }

@@ -55,8 +55,8 @@ class CustomerService
         $requiredFields = ['name', 'birth_date', 'cpf', 'rg', 'phone'];
 
         foreach ($requiredFields as $field) {
-            if (!isset($data[$field])) {
-                throw new \InvalidArgumentException("O campo {$field} é obrigatório.");
+            if (empty($data[$field])) {
+                $this->throwValidationException([$field => "O campo {$field} é obrigatório."]);
             }
         }
     }
@@ -66,7 +66,7 @@ class CustomerService
         $existingCustomer = $this->repository->getByCpf($cpf);
 
         if ($existingCustomer) {
-            throw new \RuntimeException('Cliente já cadastrado com este CPF.');
+            $this->throwValidationException(['cpf' => 'Cliente já cadastrado com este CPF.']);
         }
     }
 }
