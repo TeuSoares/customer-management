@@ -2,7 +2,6 @@
 
 namespace Domain\Customer\Services;
 
-use App\Core\Http\Middlewares\CheckIfUserIsAuthenticated;
 use App\Core\Traits\HandleExceptions;
 use Domain\Customer\Repositories\CustomerRepositoryInterface;
 use PDOStatement;
