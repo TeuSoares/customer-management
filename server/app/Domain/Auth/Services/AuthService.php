@@ -21,7 +21,7 @@ class AuthService
     public function login(array $data): string
     {
         if (!isset($data['email']) || !isset($data['password'])) {
-            $this->throwValidationException(['auth_login' => 'Todos os campos são obrigatórios.']);
+            $this->throwValidationException(['required' => 'Todos os campos são obrigatórios.']);
         }
 
         $user = $this->userRepository->findOneByEmail($data['email']);
@@ -54,7 +54,7 @@ class AuthService
     public function register(array $data): void
     {
         if (!isset($data['name']) || !isset($data['email']) || !isset($data['password'])) {
-            $this->throwValidationException(['auth_register' => 'Todos os campos são obrigatórios.']);
+            $this->throwValidationException(['required' => 'Todos os campos são obrigatórios.']);
         }
 
         $user = $this->userRepository->findOneByEmail($data['email']);

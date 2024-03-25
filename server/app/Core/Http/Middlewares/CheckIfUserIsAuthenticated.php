@@ -14,7 +14,7 @@ class CheckIfUserIsAuthenticated
     public function handle(): void
     {
         if (!Token::checkIfTokenIsValid()) {
-            $this->throwExceptionHttp('unauthenticated', 401);
+            $this->throwExceptionHttp('Não está autenticado.', 401);
         }
 
         $tokenRepository = (new Container)->make(PersonalAccessTokenRepository::class);
@@ -22,7 +22,7 @@ class CheckIfUserIsAuthenticated
         $token = $tokenRepository->findOneByToken(request()->getAccessToken());
 
         if (!$token) {
-            $this->throwExceptionHttp('unauthenticated', 401);
+            $this->throwExceptionHttp('Não está autenticado.', 401);
         }
     }
 }
