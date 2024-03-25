@@ -38,9 +38,7 @@ class Token
 
             return true;
         } catch (Throwable $e) {
-            if ($e->getMessage() === 'Expired token') {
-                return false;
-            }
+            return false;
         }
     }
 
