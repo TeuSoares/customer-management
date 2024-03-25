@@ -26,7 +26,7 @@ export default function RegisterService() {
 
       router.push('login')
     } catch (error: any) {
-      setError(error, ['name', 'email', 'password'])
+      setError(error, ['required', 'email'])
     }
 
     setIsLoading(false)

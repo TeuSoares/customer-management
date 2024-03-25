@@ -43,6 +43,7 @@ export default function CustomerAddressService(id: number) {
     {
       refetchOnWindowFocus: false,
       initialData,
+      onError: (error: any) => setError(error),
     },
   )
 
@@ -65,7 +66,7 @@ export default function CustomerAddressService(id: number) {
       router.push(`/cliente/${id}/endereco`)
     } catch (error: any) {
       setIsLoading(false)
-      setError(error)
+      setError(error, ['address', 'number', 'city', 'state'])
     }
   }
 

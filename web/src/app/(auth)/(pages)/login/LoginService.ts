@@ -36,7 +36,7 @@ export default function LoginService() {
       router.push('/')
     } catch (error: any) {
       setIsLoading(false)
-      setError(error, ['email', 'password', 'auth'])
+      setError(error, ['required', 'user'])
     }
   }
 

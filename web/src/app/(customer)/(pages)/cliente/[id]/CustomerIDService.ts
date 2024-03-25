@@ -43,6 +43,7 @@ export default function CustomerIDService(id: number) {
     {
       refetchOnWindowFocus: false,
       initialData,
+      onError: (error: any) => setError(error),
     },
   )
 
@@ -65,7 +66,7 @@ export default function CustomerIDService(id: number) {
       router.push(`/cliente/${id}`)
     } catch (error: any) {
       setIsLoading(false)
-      setError(error)
+      setError(error, ['cpf', 'name', 'birth_date', 'rg', 'phone'])
     }
   }
 

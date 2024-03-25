@@ -30,6 +30,7 @@ export default function CustomerService() {
     async () => await get('/customer'),
     {
       refetchOnWindowFocus: false,
+      onError: (error: any) => setError(error),
     },
   )
 
@@ -54,7 +55,7 @@ export default function CustomerService() {
       router.push('/')
     } catch (error: any) {
       setIsLoading(false)
-      setError(error)
+      setError(error, ['cpf', 'name', 'birth_date', 'rg', 'phone'])
     }
   }
 
