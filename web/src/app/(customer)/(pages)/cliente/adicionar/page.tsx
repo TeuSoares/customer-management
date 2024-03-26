@@ -1,5 +1,11 @@
 'use client'
 
+import {
+  handleCPFInputChange,
+  handlePhoneInputChange,
+  handleRGInputChange,
+} from '@/utils/helpers'
+
 import CardForm from '../../../../../components/layout/card-form'
 import TextField from '@/components/form/components/text-field'
 import { Card } from '@/components/ui/card'
@@ -32,12 +38,23 @@ export default function AdicionarCliente() {
             placeholder="Nome completo do cliente"
           />
           <TextField name="birth_date" type="date" label="Data de Nascimento" />
-          <TextField name="cpf" label="CPF" placeholder="Ex: 999.999.999-99" />
-          <TextField name="rg" label="RG" placeholder="Ex: 00.000.000-0" />
+          <TextField
+            name="cpf"
+            label="CPF"
+            placeholder="99999999999"
+            onChange={handleCPFInputChange}
+          />
+          <TextField
+            name="rg"
+            label="RG"
+            placeholder="000000000"
+            onChange={handleRGInputChange}
+          />
           <TextField
             name="phone"
             label="Telefone"
-            placeholder="Ex: (19) 99999-9999"
+            placeholder="19999999999"
+            onChange={handlePhoneInputChange}
           />
         </CardForm>
       </Card>

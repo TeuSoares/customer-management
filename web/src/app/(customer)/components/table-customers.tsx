@@ -2,7 +2,12 @@
 
 import { useAppContext } from '@/hooks'
 
-import { convertDataToBR } from '@/utils/helpers'
+import {
+  convertDataToBR,
+  formatCPF,
+  formatPhoneNumber,
+  formatRG,
+} from '@/utils/helpers'
 
 import LinkButton from '@/components/layout/link-button'
 import {
@@ -45,9 +50,9 @@ const TableCustomers = () => {
           <TableRow key={customer.id}>
             <TableCell>{customer.name}</TableCell>
             <TableCell>{convertDataToBR(customer.birth_date)}</TableCell>
-            <TableCell>{customer.cpf}</TableCell>
-            <TableCell>{customer.rg}</TableCell>
-            <TableCell>{customer.phone}</TableCell>
+            <TableCell>{formatCPF(customer.cpf)}</TableCell>
+            <TableCell>{formatRG(customer.rg)}</TableCell>
+            <TableCell>{formatPhoneNumber(customer.phone)}</TableCell>
             <TableCell>
               <LinkButton
                 href={`/cliente/${customer.id}`}

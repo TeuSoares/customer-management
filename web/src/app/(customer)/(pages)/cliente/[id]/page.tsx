@@ -1,6 +1,11 @@
 'use client'
 
-import { convertDataToBR } from '@/utils/helpers'
+import {
+  convertDataToBR,
+  formatCPF,
+  formatPhoneNumber,
+  formatRG,
+} from '@/utils/helpers'
 
 import InfoBox from '@/components/layout/info-box'
 import LinkButton from '@/components/layout/link-button'
@@ -51,9 +56,12 @@ export default function ShowCustomer({ params }: { params: { id: number } }) {
             title="Data de nascimento:"
             description={convertDataToBR(data!.birth_date)}
           />
-          <InfoBox title="CPF:" description={data!.cpf} />
-          <InfoBox title="RG:" description={data!.rg} />
-          <InfoBox title="Telefone:" description={data!.phone} />
+          <InfoBox title="CPF:" description={formatCPF(data!.cpf)} />
+          <InfoBox title="RG:" description={formatRG(data!.rg)} />
+          <InfoBox
+            title="Telefone:"
+            description={formatPhoneNumber(data!.phone)}
+          />
         </CardContent>
       </Card>
     </div>

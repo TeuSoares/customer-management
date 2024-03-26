@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { ChangeEvent, ReactNode } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 import {
@@ -19,6 +19,7 @@ interface TextFieldProps {
   description?: string | ReactNode
   disabled?: boolean
   className?: string
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void
 }
 
 const TextField = ({
@@ -27,6 +28,7 @@ const TextField = ({
   placeholder,
   description,
   className,
+  onChange,
   type = 'text',
   disabled = false,
 }: TextFieldProps) => {
@@ -41,7 +43,12 @@ const TextField = ({
         <FormItem className={className}>
           {label && <FormLabel>{label}</FormLabel>}
           <FormControl>
-            <Input type={type} placeholder={placeholder} {...field} />
+            <Input
+              type={type}
+              placeholder={placeholder}
+              onChangeCapture={onChange}
+              {...field}
+            />
           </FormControl>
           {description && <FormDescription>{description}</FormDescription>}
           <FormMessage />
