@@ -63,3 +63,8 @@ function getContentFromFile(string $file): array
 {
     return include $file;
 }
+
+function cleanInput(string $input)
+{
+    return preg_replace('/[^0-9]/', '', $input);
+}

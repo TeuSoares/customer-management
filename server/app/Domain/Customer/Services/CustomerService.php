@@ -21,6 +21,10 @@ class CustomerService
 
         $data['user_id'] = user()->data->id;
 
+        $data['cpf'] = cleanInput($data['cpf']);
+        $data['rg'] = cleanInput($data['rg']);
+        $data['phone'] = cleanInput($data['phone']);
+
         return $this->repository->create($data);
     }
 
@@ -37,6 +41,10 @@ class CustomerService
     public function update(int $id, array $data): void
     {
         $this->validateData($data);
+
+        $data['cpf'] = cleanInput($data['cpf']);
+        $data['rg'] = cleanInput($data['rg']);
+        $data['phone'] = cleanInput($data['phone']);
 
         if (!$this->repository->update($id, $data)) {
             $this->throwExceptionHttp('Não foi possível	atualizar. Verifique o cliente e tende novamente!');
