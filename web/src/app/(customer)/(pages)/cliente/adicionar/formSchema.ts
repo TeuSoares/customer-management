@@ -19,7 +19,10 @@ export const formSchema = z.object({
     }),
   birth_date: z
     .string()
-    .regex(/^\d{4}-\d{2}-\d{2}$/, { message: 'Data de nascimento inválida' }),
+    .regex(/^\d{4}-\d{2}-\d{2}$/, { message: 'Data de nascimento inválida' })
+    .refine((value) => value <= new Date().toISOString().split('T')[0], {
+      message: 'A data de nascimento não pode ser maior que a data atual.',
+    }),
   cpf: z
     .string()
     .regex(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/, { message: 'CPF inválido' }),
