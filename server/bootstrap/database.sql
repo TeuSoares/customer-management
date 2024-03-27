@@ -51,9 +51,9 @@ CREATE TABLE IF NOT EXISTS `customers` (
   `user_id` int(11) NOT NULL,
   `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `birth_date` date NOT NULL,
-  `cpf` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `rg` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cpf` char(11) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `rg` char(9) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` char(11) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
