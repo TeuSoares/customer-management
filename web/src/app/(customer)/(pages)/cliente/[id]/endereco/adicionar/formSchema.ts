@@ -5,10 +5,6 @@ export const formSchema = z.object({
     .string()
     .min(1, { message: 'O endereço é obrigatório.' })
     .max(80)
-    .regex(
-      new RegExp('[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$'),
-      'O campo nome só pode conter letras',
-    )
     .transform((name) => {
       return name
         .trim()
@@ -24,8 +20,20 @@ export const formSchema = z.object({
     .regex(/^\d+$/, {
       message: 'O campo número só pode conter números inteiros e positivos.',
     }),
-  city: z.string().min(1, { message: 'A cidade é obrigatória.' }),
-  state: z.string().min(1, { message: 'O estado é obrigatório.' }),
+  city: z
+    .string()
+    .min(1, { message: 'A cidade é obrigatória.' })
+    .regex(
+      new RegExp('[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$'),
+      'O campo cidade só pode conter letras',
+    ),
+  state: z
+    .string()
+    .min(1, { message: 'O estado é obrigatório.' })
+    .regex(
+      new RegExp('[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$'),
+      'O campo estado só pode conter letras',
+    ),
 })
 
 export type RegisterAddressFormData = z.infer<typeof formSchema>
