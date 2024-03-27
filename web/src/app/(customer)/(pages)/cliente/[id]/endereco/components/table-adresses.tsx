@@ -47,7 +47,7 @@ const TableAdresses = ({ customerId }: { customerId: number }) => {
             <TableCell>
               <Button
                 variant="outline"
-                className="bg-[#1E1E20] hover:bg-[##131314 hover:text-white border-none"
+                className="bg-[#1E1E20] hover:bg-[#262627] hover:text-white border-none"
                 size="icon"
                 onClick={() => handleDelete(address.id)}
               >

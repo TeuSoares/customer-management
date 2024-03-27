@@ -37,7 +37,7 @@ export default function CustomerAddressService(id: number) {
   const { setError } = useError()
   const router = useRouter()
 
-  const { data, isLoading, error } = useQuery<Customer>(
+  const { data, isLoading, error, refetch } = useQuery<Customer>(
     'customer_id_address',
     async () => await get(`/customer/address/${id}`),
     {
@@ -82,7 +82,7 @@ export default function CustomerAddressService(id: number) {
       })
 
       setIsLoading(false)
-      router.push(`/cliente/${id}/endereco`)
+      refetch()
     } catch (error: any) {
       setIsLoading(false)
       setError(error)
