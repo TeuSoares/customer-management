@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Mar 21, 2024 at 01:47 AM
+-- Generation Time: Mar 28, 2024 at 09:21 AM
 -- Server version: 5.7.36
 -- PHP Version: 8.2.3
 
@@ -31,10 +31,11 @@ DROP TABLE IF EXISTS `addresses`;
 CREATE TABLE IF NOT EXISTS `addresses` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `customer_id` int(11) NOT NULL,
-  `address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `number` int(11) DEFAULT NULL,
-  `city` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `state` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `street_address` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `neighborhood` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `number` int(11) NOT NULL,
+  `city` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `state` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `customer_id` (`customer_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -52,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `customers` (
   `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `birth_date` date NOT NULL,
   `cpf` char(11) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `rg` char(9) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `rg` char(9) COLLATE utf8mb4_unicode_ci NOT NULL,
   `phone` char(11) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
@@ -68,10 +69,10 @@ DROP TABLE IF EXISTS `personal_access_token`;
 CREATE TABLE IF NOT EXISTS `personal_access_token` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
-  `token` text COLLATE utf8mb4_unicode_ci,
+  `token` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `access` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `expire` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
