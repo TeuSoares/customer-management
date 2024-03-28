@@ -63,7 +63,7 @@ class CustomerService
         $requiredFields = ['name', 'birth_date', 'cpf', 'rg', 'phone'];
 
         foreach ($requiredFields as $field) {
-            if (empty($data[$field])) {
+            if (empty(trim($data[$field]))) {
                 $this->throwValidationException([$field => "O campo {$field} é obrigatório."]);
             }
         }

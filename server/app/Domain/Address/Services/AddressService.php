@@ -46,10 +46,10 @@ class AddressService
 
     private function validateData(array $data): void
     {
-        $requiredFields = ['address', 'number', 'city', 'state'];
+        $requiredFields = ['street_address', 'neighborhood', 'number', 'city', 'state'];
 
         foreach ($requiredFields as $field) {
-            if (empty($data[$field])) {
+            if (empty(trim($data[$field]))) {
                 $this->throwValidationException([$field => "O campo {$field} é obrigatório."]);
             }
         }
