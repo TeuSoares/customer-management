@@ -23,16 +23,22 @@ export default function RegisterAddress({
           formSchema={formSchema}
           onSubmit={handleRegister}
           defaultValues={{
-            address: '',
+            street_address: '',
+            neighborhood: '',
             number: '',
             city: '',
             state: '',
           }}
         >
           <TextField
-            name="address"
-            label="Endereço"
-            placeholder="Ex: Rua/avenida, Bairro"
+            name="street_address"
+            label="Rua/Avenida"
+            placeholder="Ex: Rua ou avenida"
+          />
+          <TextField
+            name="neighborhood"
+            label="Bairro"
+            placeholder="Ex: Centro"
           />
           <TextField
             name="number"

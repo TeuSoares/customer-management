@@ -25,28 +25,28 @@ export default function ShowCustomer({ params }: { params: { id: number } }) {
 
   return (
     <div className="flex flex-col justify-center items-center">
-      <Card className="min-[600px]:w-[600px]">
+      <Card className="w-[100%] min-[600px]:w-[600px]">
         <CardHeader>
           <CardTitle>Cliente: # {params.id}</CardTitle>
           <CardDescription>
             Esses são os dados do cliente selecionado.
           </CardDescription>
         </CardHeader>
-        <CardContent className="grid gap-4">
-          <div className=" flex items-center space-x-4 rounded-md">
+        <CardContent className="flex flex-col gap-4">
+          <div className="flex flex-col items-center max-[460px]:space-y-4 min-[460px]:flex-row min-[460px]:space-x-4 rounded-md">
             <LinkButton
-              className="bg-[#BC2627] hover:bg-[#9e3535] hover:text-white"
+              className="bg-[#BC2627] hover:bg-[#9e3535] hover:text-white max-[460px]:w-full"
               href={`/cliente/${data!.id}/editar`}
               label="Editar"
             />
             <Button
-              className="font-bold bg-[#BC2627] hover:bg-[#9e3535]"
+              className="font-bold bg-[#BC2627] hover:bg-[#9e3535] max-[460px]:w-full"
               onClick={handleDelete}
             >
               Deletar
             </Button>
             <LinkButton
-              className="bg-[#BC2627] hover:bg-[#9e3535] hover:text-white"
+              className="bg-[#BC2627] hover:bg-[#9e3535] hover:text-white max-[460px]:w-full"
               href={`/cliente/${data!.id}/endereco`}
               label="Endereços cadastrados"
             />

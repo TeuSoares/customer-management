@@ -10,7 +10,8 @@ interface Customer {
   data: Array<{
     id: number
     customer_id: number
-    address: string
+    street_address: string
+    neighborhood: string
     number: number
     city: string
     state: string
@@ -22,7 +23,8 @@ const initialData: Customer = {
     {
       id: 0,
       customer_id: 0,
-      address: '',
+      street_address: '',
+      neighborhood: '',
       number: 0,
       city: '',
       state: '',
@@ -66,7 +68,13 @@ export default function CustomerAddressService(id: number) {
       router.push(`/cliente/${id}/endereco`)
     } catch (error: any) {
       setIsLoading(false)
-      setError(error, ['address', 'number', 'city', 'state'])
+      setError(error, [
+        'street_address',
+        'neighborhood',
+        'number',
+        'city',
+        'state',
+      ])
     }
   }
 

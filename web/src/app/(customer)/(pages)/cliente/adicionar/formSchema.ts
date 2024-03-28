@@ -8,6 +8,9 @@ export const formSchema = z.object({
       new RegExp('[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$'),
       'O campo nome só pode conter letras',
     )
+    .refine((value) => value.trim().length > 0, {
+      message: 'O campo nome não pode conter apenas espaços',
+    })
     .transform((name) => {
       return name
         .trim()

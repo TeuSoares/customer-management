@@ -30,7 +30,8 @@ const TableAdresses = ({ customerId }: { customerId: number }) => {
       )}
       <TableHeader className="bg-[#BC2627]">
         <TableRow>
-          <TableHead className="text-white text-center">Endereço</TableHead>
+          <TableHead className="text-white text-center">Rua/Avenida</TableHead>
+          <TableHead className="text-white text-center">Bairro</TableHead>
           <TableHead className="text-white text-center">Número</TableHead>
           <TableHead className="text-white text-center">Cidade</TableHead>
           <TableHead className="text-center text-white">Estado</TableHead>
@@ -40,7 +41,8 @@ const TableAdresses = ({ customerId }: { customerId: number }) => {
       <TableBody className="bg-[#111111] text-white">
         {data?.map((address) => (
           <TableRow key={address.id}>
-            <TableCell>{address.address}</TableCell>
+            <TableCell>{address.street_address}</TableCell>
+            <TableCell>{address.neighborhood}</TableCell>
             <TableCell>{address.number}</TableCell>
             <TableCell>{address.city}</TableCell>
             <TableCell>{address.state}</TableCell>
