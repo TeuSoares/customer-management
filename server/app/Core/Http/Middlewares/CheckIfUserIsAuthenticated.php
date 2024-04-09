@@ -2,12 +2,13 @@
 
 namespace App\Core\Http\Middlewares;
 
+use App\Core\Http\Middlewares\Interfaces\MiddlewareInterface;
 use App\Core\Providers\Container;
 use App\Core\Traits\HandleExceptions;
 use App\Support\Token;
 use Domain\Auth\Repositories\PersonalAccessTokenRepository;
 
-class CheckIfUserIsAuthenticated
+class CheckIfUserIsAuthenticated implements MiddlewareInterface
 {
     use HandleExceptions;
 

@@ -2,7 +2,6 @@
 
 namespace Domain\Auth\Services;
 
-use App\Core\Http\Middlewares\CheckIfUserIsAuthenticated;
 use App\Core\Traits\HandleExceptions;
 use App\Support\Token;
 use Domain\Auth\Repositories\PersonalAccessTokenRepository;
@@ -46,8 +45,6 @@ class AuthService
 
     public function logout(): void
     {
-        (new CheckIfUserIsAuthenticated)->handle();
-
         $this->tokenRepository->delete(request()->getAccessToken());
     }
 

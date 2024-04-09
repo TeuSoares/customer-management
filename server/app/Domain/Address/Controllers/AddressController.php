@@ -3,7 +3,6 @@
 namespace Domain\Address\Controllers;
 
 use App\Core\Http\Controller;
-use App\Core\Http\Middlewares\CheckIfUserIsAuthenticated;
 use App\Core\Http\Request;
 use App\Core\Http\Response;
 use Domain\Address\Services\AddressService;
@@ -12,7 +11,6 @@ class AddressController extends Controller
 {
     public function __construct(protected AddressService $service)
     {
-        (new CheckIfUserIsAuthenticated)->handle();
     }
 
     public function index(Request $request): Response
