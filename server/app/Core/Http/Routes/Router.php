@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core;
+namespace App\Core\Http\Routes;
 
 use App\Core\Providers\Container;
 use App\Core\Traits\HandleExceptions;
@@ -9,41 +9,42 @@ class Router
 {
     use HandleExceptions;
 
-    private array $routes = [];
+    public static self $instance;
 
-    private function setRoutes(string $url, string $method, callable|string $callback)
+    public function __construct(
+        private Routes $routes,
+        private MiddlewareDispatcher $middlewareDispatcher
+    ) {
+    }
+
+    public static function singleInstance(): self
     {
-        if (!isset($this->routes[$url])) {
-            $this->routes[$url] = [];
+        if (empty(self::$instance)) {
+            $routes = new Routes();
+            $middlewareDispatcher = new MiddlewareDispatcher($routes);
+
+            self::$instance = new static($routes, $middlewareDispatcher);
         }
 
-        array_push($this->routes[$url], [
-            "method" => $method,
-            "callback" => $callback
-        ]);
+        return self::$instance;
     }
 
-    public function get(string $url, callable|string $callback): void
+    public function __call(string $method, array $arguments)
     {
-        $this->setRoutes($url, 'GET', $callback);
+        if (method_exists($this->routes, $method)) {
+            call_user_func_array([$this->routes, $method], $arguments);
+            return $this;
+        }
+
+        if (method_exists($this->middlewareDispatcher, $method)) {
+            call_user_func_array([$this->middlewareDispatcher, $method], $arguments);
+            return $this;
+        }
+
+        throw new \BadMethodCallException("Method $method does not exist");
     }
 
-    public function post(string $url, callable|string $callback): void
-    {
-        $this->setRoutes($url, 'POST', $callback);
-    }
-
-    public function put(string $url, callable|string $callback): void
-    {
-        $this->setRoutes($url, 'PUT', $callback);
-    }
-
-    public function delete(string $url, callable|string $callback): void
-    {
-        $this->setRoutes($url, 'DELETE', $callback);
-    }
-
-    public function dispatch(): mixed
+    public function dispatch(): void
     {
         $request_uri = $_SERVER['REQUEST_URI'];
 
@@ -52,16 +53,23 @@ class Router
         $path = $parsed_url['path'];
 
         if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-            return $this->sendOptionsResponse();
+            $this->sendOptionsResponse();
+            return;
         }
 
-        foreach ($this->routes as $route => $actions) {
+        $this->sendCorsHeaders();
+
+        foreach ($this->routes->routes as $route => $actions) {
             // Verifica se a URL da rota corresponde à URL da requisição
             if (preg_match($this->convertToRegex($route), $path, $matches)) {
+                $this->middlewareDispatcher->runGroupMiddleware($route);
+
                 foreach ($actions as $action) {
                     if ($_SERVER['REQUEST_METHOD'] == $action['method']) {
-                        $this->sendCorsHeaders();
-                        return $this->executeCallback($action['callback'], $matches);
+                        $this->middlewareDispatcher->runMiddleware($action['middleware']);
+
+                        $this->executeCallback($action['callback'], $matches);
+                        return;
                     }
                 }
 
@@ -69,7 +77,6 @@ class Router
             }
         }
 
-        $this->sendCorsHeaders();
         $this->throwExceptionHttp("Rota não está definida.", 404);
     }
 
@@ -80,7 +87,7 @@ class Router
         return "/^" . str_replace('/', '\/', $routePattern) . "$/";
     }
 
-    private function executeCallback(callable|string $callback, array $params): mixed
+    private function executeCallback(callable|string $callback, array $params): void
     {
         $request = request()->setArguments($params);
 

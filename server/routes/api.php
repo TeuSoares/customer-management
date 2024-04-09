@@ -1,22 +1,30 @@
 <?php
 
-use App\Core\Router;
+use App\Core\Http\Routes\Router;
 
-$router = new Router();
+$router = Router::singleInstance();
 
 $router->post('/login', 'Domain\Auth\Controllers\AuthController@login');
-$router->post('/logout', 'Domain\Auth\Controllers\AuthController@logout');
+$router->post('/logout', 'Domain\Auth\Controllers\AuthController@logout')->middleware(['auth']);
 $router->post('/register', 'Domain\Auth\Controllers\AuthController@register');
 
-$router->get('/customer', 'Domain\Customer\Controllers\CustomerController@index');
-$router->post('/customer', 'Domain\Customer\Controllers\CustomerController@store');
-$router->get('/customer/{id}', 'Domain\Customer\Controllers\CustomerController@show');
-$router->put('/customer/{id}', 'Domain\Customer\Controllers\CustomerController@update');
-$router->delete('/customer/{id}', 'Domain\Customer\Controllers\CustomerController@destroy');
+$router->group('/customer', function () {
+    $this->addGroupMiddleware(['auth']);
 
-$router->get('/customer/address/{id}', 'Domain\Address\Controllers\AddressController@index');
-$router->post('/customer/address/{id}', 'Domain\Address\Controllers\AddressController@store');
-$router->put('/customer/address/{id}', 'Domain\Address\Controllers\AddressController@update');
-$router->delete('/customer/address/{id}', 'Domain\Address\Controllers\AddressController@destroy');
+    $this->get('', 'Domain\Customer\Controllers\CustomerController@index');
+    $this->post('', 'Domain\Customer\Controllers\CustomerController@store');
+    $this->get('/{id}', 'Domain\Customer\Controllers\CustomerController@show');
+    $this->put('/{id}', 'Domain\Customer\Controllers\CustomerController@update');
+    $this->delete('/{id}', 'Domain\Customer\Controllers\CustomerController@destroy');
+});
+
+$router->group('/customer/address', function () {
+    $this->addGroupMiddleware(['auth']);
+
+    $this->get('/{id}', 'Domain\Address\Controllers\AddressController@index');
+    $this->post('/{id}', 'Domain\Address\Controllers\AddressController@store');
+    $this->put('/{id}', 'Domain\Address\Controllers\AddressController@update');
+    $this->delete('/{id}', 'Domain\Address\Controllers\AddressController@destroy');
+});
 
 $router->dispatch();
