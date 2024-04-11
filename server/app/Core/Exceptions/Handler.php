@@ -8,6 +8,9 @@ class Handler
     {
         if ($exception instanceof AbstractException) {
             echo $exception->throwWithMessage();
+            return;
         }
+
+        echo $exception->getMessage();
     }
 }
