@@ -18,7 +18,8 @@ class CustomerRepository implements CustomerRepositoryInterface
 
     public function getAllByUser(int $user_id, array $params = []): array
     {
-        $stmt = $this->model->read()
+        $stmt = $this->model->read('customers.*')
+            ->join('users', 'users.id', 'customers.user_id')
             ->where('user_id = :user_id')
             ->setParams([
                 'user_id' => $user_id
@@ -37,27 +38,32 @@ class CustomerRepository implements CustomerRepositoryInterface
             ])
             ->execute();
 
-        return $stmt->fetch() ?? [];
+        return $stmt->fetch();
     }
 
-    public function getById(int $id): array
+    public function getById(int $id): array|false
     {
-        $stmt = $this->model->read()
-            ->where('id = :id')
+        $stmt = $this->model->read('customers.*')
+            ->join('users', 'users.id', 'customers.user_id')
+            ->where('customers.id = :id')
+            ->where('user_id = :user_id')
             ->setParams([
-                'id' => $id
+                'id' => $id,
+                'user_id' => user()->data->id
             ])
             ->execute();
 
-        return $stmt->fetch() ?? [];
+        return $stmt->fetch();
     }
 
     public function update(int $id, array $data): int
     {
         return $this->model->where('id = :id')
+            ->where('user_id = :user_id')
             ->update($data)
             ->setParams([
                 'id' => $id,
+                'user_id' => user()->data->id,
                 ...$data
             ])
             ->execute()
@@ -67,9 +73,11 @@ class CustomerRepository implements CustomerRepositoryInterface
     public function delete(int $id): int
     {
         return $this->model->where('id = :id')
+            ->where('user_id = :user_id')
             ->delete()
             ->setParams([
-                'id' => $id
+                'id' => $id,
+                'user_id' => user()->data->id,
             ])
             ->execute()
             ->rowCount();

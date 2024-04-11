@@ -30,7 +30,11 @@ class CustomerService
 
     public function show(int $id): array
     {
-        return $this->repository->getById($id);
+        if ($customer = $this->repository->getById($id)) {
+            return $customer;
+        }
+
+        $this->throwExceptionHttp('Não foi possível localizar esse cliente!', 404);
     }
 
     public function getAllByUser(array $params = []): array|false

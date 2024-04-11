@@ -28,15 +28,6 @@ class AddressService
         return $this->repository->getAllByCustomer($customer_id);
     }
 
-    public function update(int $id, array $data): void
-    {
-        $this->validateData($data);
-
-        if (!$this->repository->update($id, $data)) {
-            $this->throwExceptionHttp('Não foi possível	atualizar. Verifique o endereço e tende novamente!');
-        }
-    }
-
     public function delete(int $id): void
     {
         if (!$this->repository->delete($id)) {

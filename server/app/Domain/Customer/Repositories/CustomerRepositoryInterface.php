@@ -12,7 +12,7 @@ interface CustomerRepositoryInterface
 
     public function getByCpf(string $cpf): array|false;
 
-    public function getById(int $id): array;
+    public function getById(int $id): array|false;
 
     public function update(int $id, array $data): int;
 
