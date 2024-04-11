@@ -43,7 +43,11 @@ export default function CustomerIDService(id: number) {
     {
       refetchOnWindowFocus: false,
       initialData,
-      onError: (error: any) => setError(error),
+      retry: false,
+      onError: (error: any) => {
+        setError(error)
+        router.push('/')
+      },
     },
   )
 
