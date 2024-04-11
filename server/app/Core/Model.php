@@ -119,21 +119,21 @@ abstract class Model
 
     public function join(string $table, string $primaryKey, string $foreinKey): self
     {
-        array_push($this->joins, "INNER JOIN {$table} ON {$primaryKey} = {$table}.{$foreinKey}");
+        array_push($this->joins, "INNER JOIN {$table} ON {$primaryKey} = {$foreinKey}");
 
         return $this;
     }
 
     public function leftJoin(string $table, string $primaryKey, string $foreinKey): self
     {
-        array_push($this->joins, "LEFT JOIN {$table} ON {$primaryKey} = {$table}.{$foreinKey}");
+        array_push($this->joins, "LEFT JOIN {$table} ON {$primaryKey} = {$foreinKey}");
 
         return $this;
     }
 
     public function rightJoin(string $table, string $primaryKey, string $foreinKey): self
     {
-        array_push($this->joins, "RIGHT JOIN {$table} ON {$primaryKey} = {$table}.{$foreinKey}");
+        array_push($this->joins, "RIGHT JOIN {$table} ON {$primaryKey} = {$foreinKey}");
 
         return $this;
     }
