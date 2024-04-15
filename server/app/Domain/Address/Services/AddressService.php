@@ -3,6 +3,7 @@
 namespace Domain\Address\Services;
 
 use App\Core\Traits\HandleExceptions;
+use App\Support\Validation;
 use Domain\Address\Repositories\AddressRepositoryInterface;
 use PDOStatement;
 
@@ -16,7 +17,7 @@ class AddressService
 
     public function create(int $customer_id, array $data): PDOStatement
     {
-        $this->validateData($data);
+        Validation::required($data);
 
         $data['customer_id'] = $customer_id;
 
@@ -32,17 +33,6 @@ class AddressService
     {
         if (!$this->repository->delete($id)) {
             $this->throwExceptionHttp('Não foi possível	deletar. Verifique o endereço e tende novamente!');
-        }
-    }
-
-    private function validateData(array $data): void
-    {
-        $requiredFields = ['street_address', 'neighborhood', 'number', 'city', 'state'];
-
-        foreach ($requiredFields as $field) {
-            if (empty(trim($data[$field]))) {
-                $this->throwValidationException([$field => "O campo {$field} é obrigatório."]);
-            }
         }
     }
 }

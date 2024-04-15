@@ -4,13 +4,12 @@ namespace Domain\Auth\Services;
 
 use App\Core\Traits\HandleExceptions;
 use App\Support\Token;
+use App\Support\Validation;
 use Domain\Auth\Repositories\PersonalAccessTokenRepository;
 use Domain\User\Repositories\UserRepositoryInterface;
 
 class AuthService
 {
-    use HandleExceptions;
-
     public function __construct(
         private UserRepositoryInterface $userRepository,
         private PersonalAccessTokenRepository $tokenRepository
@@ -19,14 +18,12 @@ class AuthService
 
     public function login(array $data): string
     {
-        if (!isset($data['email']) || !isset($data['password'])) {
-            $this->throwValidationException(['required' => 'Todos os campos são obrigatórios.']);
-        }
+        Validation::required(data: $data, message: ['required' => 'Todos os campos são obrigatórios.']);
 
         $user = $this->userRepository->findOneByEmail($data['email']);
 
         if (!$user || !passwd_verify($data['password'], $user['password'])) {
-            $this->throwValidationException(['user' => 'Usuário e(ou) senha incorretos.']);
+            Validation::throwException(['user' => 'Usuário e(ou) senha incorretos.']);
         }
 
         $expireInOneDay = time() + (1 * 24 * 60 * 60);
@@ -50,14 +47,12 @@ class AuthService
 
     public function register(array $data): void
     {
-        if (!isset($data['name']) || !isset($data['email']) || !isset($data['password'])) {
-            $this->throwValidationException(['required' => 'Todos os campos são obrigatórios.']);
-        }
+        Validation::required(data: $data, message: ['required' => 'Todos os campos são obrigatórios.']);
 
         $user = $this->userRepository->findOneByEmail($data['email']);
 
         if ($user) {
-            $this->throwValidationException(['email' => 'Esse e-mail já está em uso.']);
+            Validation::throwException(['email' => 'Esse e-mail já está em uso.']);
         }
 
         $data['password'] = passwd_hash($data['password']);

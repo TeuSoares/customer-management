@@ -3,6 +3,7 @@
 namespace Domain\Customer\Services;
 
 use App\Core\Traits\HandleExceptions;
+use App\Support\Validation;
 use Domain\Customer\Repositories\CustomerRepositoryInterface;
 use PDOStatement;
 
@@ -16,10 +17,10 @@ class CustomerService
 
     public function create(array $data): PDOStatement
     {
-        $this->validateData($data);
+        Validation::required($data);
         $this->validateUniqueCpf($data['cpf']);
 
-        $data['user_id'] = user()->data->id;
+        $data['user_id'] = user()->id;
 
         $data['cpf'] = cleanInput($data['cpf']);
         $data['rg'] = cleanInput($data['rg']);
@@ -39,12 +40,12 @@ class CustomerService
 
     public function getAllByUser(array $params = []): array|false
     {
-        return $this->repository->getAllByUser(user()->data->id, $params);
+        return $this->repository->getAllByUser(user()->id, $params);
     }
 
     public function update(int $id, array $data): void
     {
-        $this->validateData($data);
+        Validation::required($data);
 
         $data['cpf'] = cleanInput($data['cpf']);
         $data['rg'] = cleanInput($data['rg']);
@@ -62,23 +63,12 @@ class CustomerService
         }
     }
 
-    private function validateData(array $data): void
-    {
-        $requiredFields = ['name', 'birth_date', 'cpf', 'rg', 'phone'];
-
-        foreach ($requiredFields as $field) {
-            if (empty(trim($data[$field]))) {
-                $this->throwValidationException([$field => "O campo {$field} é obrigatório."]);
-            }
-        }
-    }
-
     private function validateUniqueCpf(string $cpf): void
     {
-        $existingCustomer = $this->repository->getByCpf($cpf);
+        $existingCustomer = $this->repository->getByCpf(cleanInput($cpf));
 
         if ($existingCustomer) {
-            $this->throwValidationException(['cpf' => 'Cliente já cadastrado com este CPF.']);
+            Validation::throwException(['cpf' => 'Cliente já cadastrado com este CPF.']);
         }
     }
 }
