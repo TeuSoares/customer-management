@@ -49,7 +49,7 @@ class CustomerRepository implements CustomerRepositoryInterface
             ->where('user_id = :user_id')
             ->setParams([
                 'id' => $id,
-                'user_id' => user()->data->id
+                'user_id' => user()->id
             ])
             ->execute();
 
@@ -63,7 +63,7 @@ class CustomerRepository implements CustomerRepositoryInterface
             ->update($data)
             ->setParams([
                 'id' => $id,
-                'user_id' => user()->data->id,
+                'user_id' => user()->id,
                 ...$data
             ])
             ->execute()
@@ -77,7 +77,7 @@ class CustomerRepository implements CustomerRepositoryInterface
             ->delete()
             ->setParams([
                 'id' => $id,
-                'user_id' => user()->data->id,
+                'user_id' => user()->id,
             ])
             ->execute()
             ->rowCount();

@@ -25,7 +25,7 @@ class AddressRepository implements AddressRepositoryInterface
             ->where('customers.user_id = :user_id')
             ->setParams([
                 'customer_id' => $customer_id,
-                'user_id' => user()->data->id
+                'user_id' => user()->id
             ])
             ->execute();
 
@@ -42,7 +42,7 @@ class AddressRepository implements AddressRepositoryInterface
             ->delete()
             ->setParams([
                 'id' => $id,
-                'user_id' => user()->data->id
+                'user_id' => user()->id
             ])
             ->execute()
             ->rowCount();
