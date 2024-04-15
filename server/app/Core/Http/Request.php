@@ -18,6 +18,11 @@ class Request
         return $this->arguments;
     }
 
+    public function getArgument(string $key): string
+    {
+        return $this->arguments[$key];
+    }
+
     public function getParsedBody(): array
     {
         return json_decode(file_get_contents('php://input'), true) ?? [];

@@ -22,7 +22,7 @@ class CustomerController extends Controller
 
     public function show(Request $request): Response
     {
-        $data = $this->service->show($request->getArguments()['id']);
+        $data = $this->service->show($request->getArgument('id'));
 
         return $this->responseData(response(), $data);
     }
@@ -36,14 +36,14 @@ class CustomerController extends Controller
 
     public function update(Request $request): Response
     {
-        $this->service->update($request->getArguments()['id'], $request->getParsedBody());
+        $this->service->update($request->getArgument('id'), $request->getParsedBody());
 
         return $this->responseMessage(response(), 'Cliente atualizado com sucesso.');
     }
 
     public function destroy(Request $request): Response
     {
-        $this->service->delete($request->getArguments()['id']);
+        $this->service->delete($request->getArgument('id'));
 
         return $this->responseMessage(response(), 'Cliente deletado com sucesso.');
     }
