@@ -45,7 +45,7 @@ class Connect
 
     private static function setConfigData(): void
     {
-        $database = getContentFromFile(__DIR__ . '/../../config/app.php')['database'];
+        $database = config('database');
 
         self::$host = $database['DB_HOST'];
         self::$dbname = $database['DB_DATABASE'];

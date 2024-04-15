@@ -56,12 +56,19 @@ function passwd_verify(string $password, string $hash): bool
 
 function user(): object
 {
-    return Token::getData();
+    return Token::getData()->data;
 }
 
 function getContentFromFile(string $file): array
 {
     return include $file;
+}
+
+function config(string $key): array
+{
+    $config = include __DIR__ . '/../config/app.php';
+
+    return $config[$key];
 }
 
 function cleanInput(string $input)
