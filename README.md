@@ -111,5 +111,6 @@ Iniciando com Docker:
 ``O servidor vai rodar em http://localhost:8080``
 
 Configurando o banco de dados
-   - Crie um novo banco de dados e execute o script sql que está dentro da pasta boot em server, no MySQL.
+   - Crie um novo banco de dados e execute o script sql que está dentro da pasta bootstrap em server, no MySQL.
    - Caso esteja utilizando com docker, o PHPMyAdmin vai estar rodando em: ``http://localhost:8081``
+   - Um caminho mais rápido, é você logo após ter criado seu banco de dados e configurado as conexões no .env, você poderá executar o comando ```composer run migrate``` ou se estiver utilizando docker ```docker compose run --rm composer run migrate```. Dessa forma todas as tabelas serão migradas para o banco e dados.
