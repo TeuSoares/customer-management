@@ -14,7 +14,8 @@
         "firebase/php-jwt": "^6.10"
     },
     "scripts": {
-        "server": "php -S localhost:8080 -t ./public"
+        "server": "php -S localhost:8080 -t ./public",
+        "migrate": "php ./bootstrap/migration.php"
     },
     "config": {
         "process-timeout": 0
