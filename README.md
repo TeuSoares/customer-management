@@ -17,6 +17,16 @@ Back-end
 * Banco de dados MySql
 * JWT para autenticação
 
+## Funcionalidades
+* [x] Cadastro de usuários administrator
+* [x] Carregamento na dashboard de todos os cliente pertencente ao usuário logado.
+* [x] Adicionar um novo cliente para o usuário logado.
+* [x] Visualizar as informação de determinado cliente, de acordo com o ID
+* [x] Cadastro de endereços para determinado cliente
+* [x] Deletar um cliente
+* [x] Deletar um endereço, pertencente a um cliente
+* [x] Atualizar os dados de um cliente
+
 ## Inicialização do Projeto
 
 Clone esse repositório:
