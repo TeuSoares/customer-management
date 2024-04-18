@@ -2,6 +2,7 @@
 
 import TextField from '@/components/form/components/text-field'
 import CardForm from '@/components/layout/card-form'
+import Center from '@/components/layout/center'
 import { Card } from '@/components/ui/card'
 
 import CustomerAddressService from '../CustomerAddressService'
@@ -15,7 +16,7 @@ export default function RegisterAddress({
   const { handleRegister } = CustomerAddressService(params.id)
 
   return (
-    <div className="flex justify-center items-center">
+    <Center>
       <Card className="min-[450px]:w-[450px]">
         <CardForm
           title={`Adicionar endereço para: # ${params.id}`}
@@ -49,6 +50,6 @@ export default function RegisterAddress({
           <TextField name="state" label="Estado" placeholder="Ex: São Paulo" />
         </CardForm>
       </Card>
-    </div>
+    </Center>
   )
 }

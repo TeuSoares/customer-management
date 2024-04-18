@@ -7,6 +7,7 @@ import {
   formatRG,
 } from '@/utils/helpers'
 
+import Center from '@/components/layout/center'
 import InfoBox from '@/components/layout/info-box'
 import LinkButton from '@/components/layout/link-button'
 import { Button } from '@/components/ui/button'
@@ -24,8 +25,8 @@ export default function ShowCustomer({ params }: { params: { id: number } }) {
   const { data, handleDelete } = CustomerIDService(params.id)
 
   return (
-    <div className="flex flex-col justify-center items-center">
-      <Card className="w-[100%] min-[600px]:w-[600px]">
+    <Center>
+      <Card className="min-[600px]:w-[600px]">
         <CardHeader>
           <CardTitle>Cliente: # {params.id}</CardTitle>
           <CardDescription>
@@ -64,6 +65,6 @@ export default function ShowCustomer({ params }: { params: { id: number } }) {
           />
         </CardContent>
       </Card>
-    </div>
+    </Center>
   )
 }

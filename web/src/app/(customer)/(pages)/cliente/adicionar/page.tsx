@@ -8,6 +8,7 @@ import {
 
 import CardForm from '../../../../../components/layout/card-form'
 import TextField from '@/components/form/components/text-field'
+import Center from '@/components/layout/center'
 import { Card } from '@/components/ui/card'
 
 import CustomerService from '../../CustomerService'
@@ -17,7 +18,7 @@ export default function AdicionarCliente() {
   const { handleRegisterCustomer } = CustomerService()
 
   return (
-    <div className="flex justify-center items-center">
+    <Center>
       <Card className="min-[450px]:w-[450px]">
         <CardForm
           title="Adicionar Cliente"
@@ -58,6 +59,6 @@ export default function AdicionarCliente() {
           />
         </CardForm>
       </Card>
-    </div>
+    </Center>
   )
 }

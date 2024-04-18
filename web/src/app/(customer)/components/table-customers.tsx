@@ -27,7 +27,7 @@ const TableCustomers = () => {
   const { isLoading } = useAppContext()
 
   return (
-    <Table className="w-ful text-center">
+    <Table className="w-full text-center">
       {!isLoading && !data?.length && (
         <TableCaption className="text-white">
           Parece que você ainda não possui clientes para gerenciar.

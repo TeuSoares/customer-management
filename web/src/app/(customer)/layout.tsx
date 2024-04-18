@@ -20,7 +20,7 @@ export default function RootLayoutCustomer({
       <Loading />
       <QueryClientProvider client={queryClient}>
         <Header />
-        <main className="py-10 px-5">
+        <main className="flex flex-col h-full">
           <Container>{children}</Container>
         </main>
       </QueryClientProvider>

@@ -11,6 +11,7 @@ import {
 
 import TextField from '@/components/form/components/text-field'
 import CardForm from '@/components/layout/card-form'
+import Center from '@/components/layout/center'
 import { Card } from '@/components/ui/card'
 
 import { formSchema } from '../../adicionar/formSchema'
@@ -20,7 +21,7 @@ export default function UpdateCustomer({ params }: { params: { id: number } }) {
   const { data, handleUpdate } = CustomerIDService(params.id)
 
   return (
-    <div className="flex justify-center items-center">
+    <Center>
       <Card className="min-[450px]:w-[450px]">
         <CardForm
           title={`Editando Cliente: # ${params.id}`}
@@ -61,6 +62,6 @@ export default function UpdateCustomer({ params }: { params: { id: number } }) {
           />
         </CardForm>
       </Card>
-    </div>
+    </Center>
   )
 }
